@@ -25,6 +25,7 @@ document.addEventListener(
 
 // === Info-Box schließen und Musik abspielen ===
 function closeInfoBox() {
+  var body = document.querySelector("html");
   const box = document.getElementById('infobox');
   const bgmusic = document.getElementById('bgmusic');
 
@@ -39,6 +40,15 @@ function closeInfoBox() {
   setTimeout(() => {
     box.style.display = 'none';
   }, 500);
+
+    if (body.requestFullscreen) {
+      body.requestFullscreen();
+    } else if (body.webkitRequestFullscreen) { /* Safari */
+      body.webkitRequestFullscreen();
+    } else if (body.msRequestFullscreen) { /* IE11 */
+      body.msRequestFullscreen();
+    }
+
 }
 
 // === Musik an-/ausschalten ===
@@ -68,19 +78,63 @@ function volumetoggle() {
   isMuted = !isMuted;
 }
 
-// === Mehrsprachige Begrüßung (Typing-Effekt) ===
 const texts = [
-  "Welcome to Kiminet",         // English
-  "Bienvenido a Kiminet",       // Spanish
-  "Bienvenue à Kiminet",        // French
-  "Willkommen bei Kiminet",     // German
-  "Benvenuti a Kiminet",        // Italian
-  "ようこそキミネットへ",         // Japanese
-  "Kiminetへようこそ",            // Japanese 2
-  "Kiminet에 오신 것을 환영합니다", // Korean
-  "Willkommen zu Kiminet",      // German 2
-  "مرحبا بك في كيمينيت",         // Arabic
+  // Real languages (continuation + rare ones)
+  "Welcome to Kiminet",                        // English
+  "Bienvenido a Kiminet",                      // Spanish
+  "Bienvenue à Kiminet",                       // French
+  "Willkommen bei Kiminet",                    // German
+  "Benvenuti a Kiminet",                       // Italian
+  "ようこそキミネットへ",                          // Japanese
+  "Kiminetへようこそ",                             // Japanese alt
+  "Kiminet에 오신 것을 환영합니다",                  // Korean
+  "مرحبا بك في كيمينيت",                          // Arabic
+  "Добро пожаловать в Kiminet",                // Russian
+  "欢迎来到Kiminet",                               // Chinese (Simplified)
+  "歡迎來到Kiminet",                               // Chinese (Traditional)
+  "Bem-vindo ao Kiminet",                      // Portuguese
+  "स्वागत है Kiminet में",                        // Hindi
+  "ברוך הבא לקימינט",                            // Hebrew
+  "Selamat datang di Kiminet",                 // Indonesian
+  "Chào mừng đến với Kiminet",                 // Vietnamese
+  "Tervetuloa Kiminetiin",                     // Finnish
+  "Croeso i Kiminet",                          // Welsh
+  "Fáilte go Kiminet",                         // Irish Gaelic
+  "Maligayang pagdating sa Kiminet",           // Tagalog
+  "Karibu Kiminet",                            // Swahili
+  "Kia ora ki Kiminet",                        // Māori
+  "Talofa lava i Kiminet",                     // Samoan
+  "ለKiminet እንኳን ደህና መጡ",                      // Amharic (Ethiopia)
+  "Добре дошли в Kiminet",                     // Bulgarian
+  "Ласкаво просимо до Kiminet",                // Ukrainian
+  "Kiminet'e hoş geldiniz",                    // Turkish
+  "ຍິນດີຕ້ອນຮັບສູ່ Kiminet",                    // Lao
+  "សូមស្វាគមន៍មកកាន់ Kiminet",                   // Khmer
+  "வணக்கம் Kiminet-இல்",                          // Tamil
+  "કિમિનેટમાં આપનું સ્વાગત છે",                     // Gujarati
+  "ຍິນດີຕ້ອນຮັບມາຍັງ Kiminet",                   // Lao alt
+  "Wamkelekile eKiminet",                      // Xhosa
+  "Nnabata na Kiminet",                        // Igbo
+  "Kiminet aba wo akye",                       // Akan (Twi)
+
+  // Constructed languages
+  "Elen sila lumenn’ omentielvo, Kiminet",     // Elvish (Quenya - Tolkien)
+  "nuqneH, Kiminet",                            // Klingon (Star Trek)
+  "Athchomar chomakaan Kiminet",               // Dothraki (Game of Thrones)
+  "Yol to Kiminet",                             // Valyrian (High Valyrian)
+  "Ia! Kiminet ftaghn!",                        // R'lyehian (Lovecraftian, Cthulhu vibes)
+  "Toki pona la Kiminet o",                     // Toki Pona
+  "Mellon, welcome to Kiminet",                 // Sindarin (Elvish, Tolkien)
+  "🫱🫲 Welcome to Kiminet",                      // Meme-handshake
+  "🐸☕️ Welcome to Kiminet",                     // Kermit meme
+  "UwU~ Welcome tu Kiminyet 💖",                // UwU speak
+  "W3lc0m3 2 K!m!n3t",                          // L33t Speak
+  "✨🌈 Welcome to Kiminet ✨🌈",                 // Aesthetic sparkles
+  "👋👽 Welcome to Kiminet, Earthling",           // Alien speak
+  "🤖 01010100 01101111 Kiminet",               // Binary (says "To Kiminet")
+  "meow meow welcome to Kiminet 🐾",            // Cat language
 ];
+
 
 let currentTextIndex = 0;
 let current = 0;
